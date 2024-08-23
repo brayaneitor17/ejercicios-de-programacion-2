@@ -1,0 +1,69 @@
+public class CalificacionesEstudiantes {
+
+    public static void main(String[] args) {
+        // Definir el arreglo de calificaciones
+        double[] calificaciones = {4.5, 3.2, 2.8, 5.0, 3.7, 4.0, 2.5, 3.9, 4.2, 3.1, 4.6, 2.9, 3.8, 4.1, 2.7};
+        
+        // Encontrar la calificación más alta
+        double maxCalificacion = obtenerMaximaCalificacion(calificaciones);
+        
+        // Calcular el porcentaje de aprobados
+        double porcentajeAprobados = calcularPorcentajeExitosos(calificaciones, 3.0);
+        
+        // Calcular el promedio de las calificaciones
+        double promedioCalificaciones = calcularPromedioCalificaciones(calificaciones);
+        
+        // Encontrar la posición de la calificación más baja
+        int indiceMinCalificacion = obtenerIndiceMinimaCalificacion(calificaciones);
+        
+        // Imprimir resultados
+        System.out.printf("Calificación más alta: %.2f%n", maxCalificacion);
+        System.out.printf("Porcentaje de estudiantes aprobados con calificación superior a 3.0: %.2f%%%n", porcentajeAprobados);
+        System.out.printf("Promedio de calificaciones: %.2f%n", promedioCalificaciones);
+        System.out.printf("Índice de la calificación más baja: %d%n", indiceMinCalificacion);
+    }
+    
+    // Método para encontrar la calificación más alta
+    public static double obtenerMaximaCalificacion(double[] calificaciones) {
+        double maximo = calificaciones[0];
+        for (double calificacion : calificaciones) {
+            if (calificacion > maximo) {
+                maximo = calificacion;
+            }
+        }
+        return maximo;
+    }
+    
+    // Método para calcular el porcentaje de estudiantes aprobados
+    public static double calcularPorcentajeExitosos(double[] calificaciones, double umbral) {
+        int exitosos = 0;
+        for (double calificacion : calificaciones) {
+            if (calificacion > umbral) {
+                exitosos++;
+            }
+        }
+        return (exitosos / (double)calificaciones.length) * 100;
+    }
+    
+    // Método para calcular el promedio de las calificaciones
+    public static double calcularPromedioCalificaciones(double[] calificaciones) {
+        double suma = 0;
+        for (double calificacion : calificaciones) {
+            suma += calificacion;
+        }
+        return suma / calificaciones.length;
+    }
+    
+    // Método para encontrar el índice de la calificación más baja
+    public static int obtenerIndiceMinimaCalificacion(double[] calificaciones) {
+        double minimo = calificaciones[0];
+        int indice = 0;
+        for (int i = 1; i < calificaciones.length; i++) {
+            if (calificaciones[i] < minimo) {
+                minimo = calificaciones[i];
+                indice = i;
+            }
+        }
+        return indice;
+    }
+}
