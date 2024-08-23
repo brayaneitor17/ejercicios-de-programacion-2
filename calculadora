@@ -1,0 +1,95 @@
+import java.util.Scanner;
+
+public class Calculadora {
+
+    // Método para realizar la adición de dos o tres números
+    public double sumar(double... valores) {
+        if (valores.length < 2) {
+            throw new IllegalArgumentException("Es necesario ingresar al menos dos números para sumar.");
+        }
+        double sumaTotal = 0;
+        for (double valor : valores) {
+            sumaTotal += valor;
+        }
+        return sumaTotal;
+    }
+
+    // Método para realizar la resta de dos o tres números
+    public double restar(double... valores) {
+        if (valores.length < 2) {
+            throw new IllegalArgumentException("Es necesario ingresar al menos dos números para restar.");
+        }
+        double resultadoResta = valores[0];
+        for (int i = 1; i < valores.length; i++) {
+            resultadoResta -= valores[i];
+        }
+        return resultadoResta;
+    }
+
+    // Método para realizar la multiplicación de dos o tres números
+    public double multiplicar(double... valores) {
+        if (valores.length < 2) {
+            throw new IllegalArgumentException("Es necesario ingresar al menos dos números para multiplicar.");
+        }
+        double productoTotal = 1;
+        for (double valor : valores) {
+            productoTotal *= valor;
+        }
+        return productoTotal;
+    }
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        Calculadora calc = new Calculadora();
+
+        while (true) {
+            System.out.println("Seleccione una operación:");
+            System.out.println("1. Sumar");
+            System.out.println("2. Restar");
+            System.out.println("3. Multiplicar");
+            System.out.println("4. Salir");
+
+            System.out.print("Ingrese el número de la operación que desea realizar: ");
+            int opcion = entrada.nextInt();
+
+            if (opcion == 4) {
+                System.out.println("Cerrando el programa.");
+                break;
+            }
+
+            System.out.print("¿Cuántos números desea utilizar? (2 o 3): ");
+            int cantidadNumeros = entrada.nextInt();
+            if (cantidadNumeros != 2 && cantidadNumeros != 3) {
+                System.out.println("Cantidad de valores no válida. Debe ser 2 o 3.");
+                continue;
+            }
+
+            double[] valores = new double[cantidadNumeros];
+            for (int i = 0; i < cantidadNumeros; i++) {
+                System.out.print("Ingrese el número " + (i + 1) + ": ");
+                valores[i] = entrada.nextDouble();
+            }
+
+            try {
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Resultado de la suma: " + calc.sumar(valores));
+                        break;
+                    case 2:
+                        System.out.println("Resultado de la resta: " + calc.restar(valores));
+                        break;
+                    case 3:
+                        System.out.println("Resultado de la multiplicación: " + calc.multiplicar(valores));
+                        break;
+                    default:
+                        System.out.println("Opción no reconocida.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        entrada.close();
+    }
+}
+
